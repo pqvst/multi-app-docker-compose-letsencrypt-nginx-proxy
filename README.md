@@ -1,7 +1,7 @@
 # *Multi-App* Web Proxy using Docker-Compose, NGINX, and Let's Encrypt
 Here's a fairly straightforward solution for how to setup multiple docker-compose applications that share the same NGINX proxy.
 
-## Example:
+## Example
 This is what we want to do. 2 docker-compose apps running on the same server, that share the same NGINX proxy.
 
 ```
@@ -15,12 +15,10 @@ Client --- NGINX ---|                               |
         |-------------------------------------------|
 ```
 
-## Problem:
+## Problem
 You can't include an NGINX proxy in each application becaue then you would have multiple proxies trying to listen on port 80/443. You can only have one.
 
-Unfortunately, docker-compose doesn't have any built in support for "singleton" services that are shared across projects. I.e. there's no way to say:
-
-> Only create this service if it doesn't already exist.
+Unfortunately, docker-compose doesn't have any built in support for "singleton" services that are shared across projects. I.e. there's no way to say: "Only create this service if it doesn't already exist."
 
 ## Solution
 My solution is to split up the above example into 3 projects and share the same network across all projects.
