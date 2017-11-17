@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  whoami:
+    image: jwilder/whoami
+    environment:
+      - VIRTUAL_HOST=app1.example.com
+
+networks:
+  default:
+    external:
+      name: router_default
