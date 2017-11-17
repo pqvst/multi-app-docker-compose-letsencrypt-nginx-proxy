@@ -26,9 +26,7 @@ Unfortunately, docker-compose doesn't have any built in support for "singleton" 
 My solution is to split up the above example into 3 projects and share the same network across all projects.
 
 ### router
-This is the web proxy (router). It sets up the nginx container, the jwilder nginx-gen container, and a letsencrypt companion.
-
-By default it will also create a network called "router_default".
+This is the web proxy (router). It sets up the nginx container, the jwilder nginx-gen container, and a letsencrypt companion. By default it will also create a network called "router_default" (see caveat below).
 
 ### apps
 The only thing you have to change is to use the "router_default" network.
@@ -43,7 +41,7 @@ networks:
 ## Usage
 To start everything up, just run `docker-compose up` for each project (starting with `router`). I have a helper script that does this (`up.sh`)
 
-## Cavet
+## Caveat
 The network name is generated based on the router's project name (which is by default the directory name). If you rename the project then you have to rename the app networks. 
 
 An alternative solution would be to explicitly create your own network. For example:
